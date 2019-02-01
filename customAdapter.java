@@ -43,7 +43,7 @@ public class customAdapter extends RecyclerView.Adapter <customAdapter.MyViewHol
 
     public customAdapter(Context c, ArrayList <owner> p) {
         this.mContext = c;
-        this.ownerlist = p;
+        this.ownerlist = new ArrayList <>();;
     }
 
 
