@@ -28,7 +28,7 @@ public class prospectowner_listview extends AppCompatActivity {
     ArrayList <com.example.android.e7gzlykora.owner> ownerlist = new ArrayList <>();
     private DatabaseReference mFirebaseDatabase;
     private FirebaseDatabase mFirebaseInstance;
-    owner owner;        // You should Change your manner to declare object (type Object with capital letter first) i.e: Owner owner
+    owner owner;
     customAdapter adapter;
 
     @Override
@@ -39,8 +39,12 @@ public class prospectowner_listview extends AppCompatActivity {
         list = findViewById(R.id.list);
         LinearLayoutManager manager = new LinearLayoutManager(this);
         list.setLayoutManager(manager);
+        list.setHasFixedSize(true);
+        manager.setOrientation(LinearLayoutManager.VERTICAL);
         adapter = new customAdapter(prospectowner_listview.this, ownerlist);
-        list.setAdapter(adapter);
+
+
+
 
         mFirebaseInstance = FirebaseDatabase.getInstance();
         mFirebaseDatabase = mFirebaseInstance.getReference("owners");
@@ -48,13 +52,16 @@ public class prospectowner_listview extends AppCompatActivity {
         mFirebaseDatabase.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                ArrayList <com.example.android.e7gzlykora.owner> ownerLs = new ArrayList <>();
                 for (DataSnapshot data : dataSnapshot.getChildren()) {
                     owner o = data.getValue(owner.class);
-                    // i want to know this part gives value or not
-                    ownerLs.add(o);
+
+                    ownerlist.add(o);
+
                 }
+
                 adapter.addData(ownerlist);
+                list.setAdapter(adapter);
+
 
 
             }

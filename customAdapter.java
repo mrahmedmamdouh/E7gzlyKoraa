@@ -43,7 +43,7 @@ public class customAdapter extends RecyclerView.Adapter <customAdapter.MyViewHol
 
     public customAdapter(Context c, ArrayList <owner> p) {
         this.mContext = c;
-        this.ownerlist = new ArrayList <>();;
+        this.ownerlist = p;
     }
 
 
@@ -57,13 +57,11 @@ public class customAdapter extends RecyclerView.Adapter <customAdapter.MyViewHol
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
 
-        owner owner = ownerlist.get(position);
-
-        holder.name.setText(owner.getName());
-        holder.field.setText(owner.getFieldname());
-        holder.mobile.setText(owner.getMobile());
-        holder.address.setText(owner.getAddress());
-        holder.cost.setText(owner.getCost());
+        holder.name.setText(ownerlist.get(position).getName());
+        holder.field.setText(ownerlist.get(position).getFieldname());
+        holder.mobile.setText(ownerlist.get(position).getMobile());
+        holder.address.setText(ownerlist.get(position).getAddress());
+        holder.cost.setText(ownerlist.get(position).getCost());
     }
 
     @Override
@@ -73,12 +71,10 @@ public class customAdapter extends RecyclerView.Adapter <customAdapter.MyViewHol
 
     public void addData(ArrayList <owner> newData) {
         this.ownerlist.addAll(newData);
-        notifyOnDataSetChanged();
+        notifyDataSetChanged();
     }
 
-    private void notifyOnDataSetChanged() {
 
-    }
 
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
@@ -101,5 +97,3 @@ public class customAdapter extends RecyclerView.Adapter <customAdapter.MyViewHol
         }
     }
 }
-
-
