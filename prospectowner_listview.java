@@ -42,6 +42,7 @@ public class prospectowner_listview extends AppCompatActivity {
         list.setHasFixedSize(true);
         manager.setOrientation(LinearLayoutManager.VERTICAL);
         adapter = new customAdapter(prospectowner_listview.this, ownerlist);
+        list.setAdapter(adapter);
 
 
 
@@ -52,18 +53,16 @@ public class prospectowner_listview extends AppCompatActivity {
         mFirebaseDatabase.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                ArrayList <com.example.android.e7gzlykora.owner> myList = new ArrayList <>();
                 for (DataSnapshot data : dataSnapshot.getChildren()) {
                     owner o = data.getValue(owner.class);
-
-                    ownerlist.add(o);
+                    myList.add(o);
 
                 }
-
-                adapter.addData(ownerlist);
-                list.setAdapter(adapter);
-
-
-
+                if(myList.size()>0){
+                    Log.d("check", "data here ");
+                    adapter.addData(myList);
+                }
             }
 
             @Override
